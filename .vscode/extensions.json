@@ -1,54 +1,16 @@
 {
   "recommendations": [
-    // Python extensions
-    // TypeScript/React extensions
-    // General extensions
     // ========================================
     // PYTHON DEVELOPMENT
     // ========================================
-    "ms-python.vscode-pylance",
-    "ms-python.debugpy",
-    "ms-python.black-formatter",
-    "ms-python.flake8",
-    "ms-python.isort",
-    "ms-python.mypy-type-checker",
     "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+    "charliermarsh.ruff",
     // ========================================
     // JAVASCRIPT/TYPESCRIPT/REACT
     // ========================================
-    "ms-vscode.vscode-typescript-next",
     "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    // ========================================
-    // GENERAL DEVELOPMENT
-    // ========================================
-    "ms-vscode.vscode-json",
-    "redhat.vscode-yaml",
-    "yzhang.markdown-all-in-one",
-    // ========================================
-    // GIT AND VERSION CONTROL
-    // ========================================
-    // ========================================
-    // TESTING AND DEBUGGING
-    // ========================================
-    // ========================================
-    // API DEVELOPMENT
-    // ========================================
-    "42crunch.vscode-openapi",
-    "humao.rest-client",
-    // ========================================
-    // PRODUCTIVITY AND UI
-    // ========================================
-    // ========================================
-    // QUALITY AND FORMATTING
-    // ========================================
-    "streetsidesoftware.code-spell-checker",
-    "editorconfig.editorconfig",
-    "christian-kohler.path-intellisense",
-    "wayou.vscode-todo-highlight"
-  ],
-  "unwantedRecommendations": [
-    "ms-python.pylint"
+    "dbaeumer.vscode-eslint"
   ]
 }

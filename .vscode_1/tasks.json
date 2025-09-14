@@ -1,0 +1,717 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // ========================================
+        // SERVER (Python/FastAPI) TASKS
+        // ========================================
+        {
+            "label": "Server: Start Development",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && python main.py",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "server"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*Starting.*",
+                    "endsPattern": "^.*Application startup complete.*"
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "Server: Start Production",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8000",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "group": "server"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*Starting.*",
+                    "endsPattern": "^.*Application startup complete.*"
+                }
+            }
+        },
+        {
+            "label": "Server: Setup Virtual Environment",
+            "type": "shell",
+            "command": "cd server && python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "setup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Install Dependencies",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && pip install -r requirements.txt",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "setup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Upgrade Dependencies",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && pip install --upgrade -r requirements.txt",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "setup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        // ========================================
+        // SERVER TESTING TASKS
+        // ========================================
+        {
+            "label": "Server: Run All Tests",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && ./run_tests.sh all",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "testing"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                {
+                    "pattern": {
+                        "regexp": "^(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "message": 5
+                    }
+                },
+                {
+                    "pattern": {
+                        "regexp": "^FAILED (.*):(\\d+) - (.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3
+                    }
+                }
+            ]
+        },
+        {
+            "label": "Server: Run Unit Tests",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && ./run_tests.sh unit",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "testing"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Run Integration Tests",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && ./run_tests.sh integration",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "testing"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Run API Tests",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && ./run_tests.sh api",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "testing"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Run Tests with Coverage",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && ./run_tests.sh coverage",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "testing"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Run Fast Tests",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && ./run_tests.sh fast",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "testing"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        // ========================================
+        // SERVER LINTING AND FORMATTING
+        // ========================================
+        {
+            "label": "Server: Lint with Flake8",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && flake8 app/ tests/",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "linting"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(\\w+)\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "Server: Format with Black",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && black app/ tests/",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "linting"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Sort Imports with isort",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && isort app/ tests/",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "linting"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Server: Type Check with mypy",
+            "type": "shell",
+            "command": "cd server && source .venv/bin/activate && mypy app/",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "linting"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(error|warning|note):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            }
+        },
+        // ========================================
+        // FRONTEND (Next.js) TASKS
+        // ========================================
+        {
+            "label": "Frontend: Start Development",
+            "type": "shell",
+            "command": "npm run dev",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "frontend"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s+(error|warning|info)\\s+(.*):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "code": 5,
+                    "message": 6
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*compiled.*",
+                    "endsPattern": "^.*Ready in.*"
+                }
+            },
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "Frontend: Build Production",
+            "type": "shell",
+            "command": "npm run build",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "frontend"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "problemMatcher": [
+                "$tsc",
+                {
+                    "pattern": {
+                        "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s+(error|warning)\\s+(.*):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "code": 5,
+                        "message": 6
+                    }
+                }
+            ]
+        },
+        {
+            "label": "Frontend: Start Production",
+            "type": "shell",
+            "command": "npm run start",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "group": "frontend"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s+(error|warning|info)\\s+(.*):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "code": 5,
+                    "message": 6
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*Local:.*",
+                    "endsPattern": "^.*Ready in.*"
+                }
+            },
+            "dependsOn": "Frontend: Build Production"
+        },
+        {
+            "label": "Frontend: Install Dependencies",
+            "type": "shell",
+            "command": "npm install",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "setup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            }
+        },
+        {
+            "label": "Frontend: Update Dependencies",
+            "type": "shell",
+            "command": "npm update",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "setup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            }
+        },
+        // ========================================
+        // FRONTEND LINTING AND TYPE CHECKING
+        // ========================================
+        {
+            "label": "Frontend: Lint",
+            "type": "shell",
+            "command": "npm run lint",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "linting"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "problemMatcher": [
+                "$eslint-stylish"
+            ]
+        },
+        {
+            "label": "Frontend: Type Check",
+            "type": "shell",
+            "command": "npm run type-check",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "linting"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "problemMatcher": [
+                "$tsc"
+            ]
+        },
+        {
+            "label": "Frontend: Bundle Analyzer",
+            "type": "shell",
+            "command": "npm run build:analyze",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "frontend"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            }
+        },
+        // ========================================
+        // HEALTH CHECKS AND MONITORING
+        // ========================================
+        {
+            "label": "Health: Check Server",
+            "type": "shell",
+            "command": "curl -f http://localhost:8000/api/health || echo 'Server not responding'",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "health"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Health: Check Frontend",
+            "type": "shell",
+            "command": "cd app && npm run health-check",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "health"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Health: Check Both Services",
+            "type": "shell",
+            "command": "echo '🔍 Checking server...' && curl -f http://localhost:8000/api/health && echo '✅ Server OK' && echo '🔍 Checking frontend...' && curl -f http://localhost:3000/health && echo '✅ Frontend OK' || echo '❌ One or more services not responding'",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "health"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        // ========================================
+        // DEVELOPMENT WORKFLOW TASKS
+        // ========================================
+        {
+            "label": "Dev: Start Full Stack",
+            "dependsOrder": "parallel",
+            "dependsOn": [
+                "Server: Start Development",
+                "Frontend: Start Development"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "group": "workflow"
+            }
+        },
+        {
+            "label": "Dev: Build All",
+            "dependsOrder": "parallel",
+            "dependsOn": [
+                "Frontend: Build Production"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "workflow"
+            }
+        },
+        {
+            "label": "Dev: Setup Project",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Server: Setup Virtual Environment",
+                "Frontend: Install Dependencies"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "workflow"
+            }
+        },
+        {
+            "label": "Dev: Lint All",
+            "dependsOrder": "parallel",
+            "dependsOn": [
+                "Server: Lint with Flake8",
+                "Frontend: Lint"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "workflow"
+            }
+        },
+        {
+            "label": "Dev: Type Check All",
+            "dependsOrder": "parallel",
+            "dependsOn": [
+                "Server: Type Check with mypy",
+                "Frontend: Type Check"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "workflow"
+            }
+        },
+        // ========================================
+        // CLEANUP AND MAINTENANCE
+        // ========================================
+        {
+            "label": "Cleanup: Clear All Caches",
+            "type": "shell",
+            "command": "echo '🧹 Clearing caches...' && rm -rf server/__pycache__ server/app/__pycache__ server/.pytest_cache && cd app && rm -rf .next node_modules/.cache && echo '✅ Caches cleared'",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "cleanup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Cleanup: Reset Node Modules",
+            "type": "shell",
+            "command": "rm -rf node_modules package-lock.json && npm install",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "cleanup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            }
+        },
+        {
+            "label": "Cleanup: Reset Python Environment",
+            "type": "shell",
+            "command": "rm -rf .venv && python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "cleanup"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/server"
+            }
+        }
+    ]
+}

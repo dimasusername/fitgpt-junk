@@ -1,0 +1,222 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        // ========================================
+        // PYTHON/FASTAPI DEBUGGING
+        // ========================================
+        {
+            "name": "Debug FastAPI Server",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/server/main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/server",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/server"
+            },
+            "python": "${workspaceFolder}/server/.venv/bin/python",
+            "args": [],
+            "justMyCode": false,
+            "preLaunchTask": "Server: Install Dependencies"
+        },
+        {
+            "name": "Debug FastAPI Server (Production Mode)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/server",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/server"
+            },
+            "python": "${workspaceFolder}/server/.venv/bin/python",
+            "args": [
+                "main:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000",
+                "--reload"
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "Debug Current Python File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/server",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/server"
+            },
+            "python": "${workspaceFolder}/server/.venv/bin/python",
+            "justMyCode": false
+        },
+        // ========================================
+        // PYTHON TESTING DEBUGGING
+        // ========================================
+        {
+            "name": "Debug Python Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/server",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/server"
+            },
+            "python": "${workspaceFolder}/server/.venv/bin/python",
+            "args": [
+                "tests/",
+                "-v",
+                "--tb=short"
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "Debug Current Test File",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/server",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/server"
+            },
+            "python": "${workspaceFolder}/server/.venv/bin/python",
+            "args": [
+                "${file}",
+                "-v",
+                "--tb=short"
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "Debug Unit Tests Only",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/server",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/server"
+            },
+            "python": "${workspaceFolder}/server/.venv/bin/python",
+            "args": [
+                "tests/",
+                "-v",
+                "-m",
+                "unit"
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "Debug API Tests Only",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/server",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/server"
+            },
+            "python": "${workspaceFolder}/server/.venv/bin/python",
+            "args": [
+                "tests/",
+                "-v",
+                "-m",
+                "api"
+            ],
+            "justMyCode": false
+        },
+        // ========================================
+        // NODE.JS/NEXT.JS DEBUGGING
+        // ========================================
+        {
+            "name": "Debug Next.js Development",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/app/node_modules/.bin/next",
+            "args": [
+                "dev"
+            ],
+            "cwd": "${workspaceFolder}/app",
+            "console": "integratedTerminal",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "preLaunchTask": "Frontend: Install Dependencies"
+        },
+        {
+            "name": "Debug Next.js Production Build",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/app/node_modules/.bin/next",
+            "args": [
+                "start"
+            ],
+            "cwd": "${workspaceFolder}/app",
+            "console": "integratedTerminal",
+            "env": {
+                "NODE_ENV": "production"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "preLaunchTask": "Frontend: Build Production"
+        },
+        // ========================================
+        // BROWSER DEBUGGING
+        // ========================================
+        {
+            "name": "Debug in Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/app",
+            "userDataDir": false,
+            "preLaunchTask": "Frontend: Start Development"
+        },
+        {
+            "name": "Attach to Chrome",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "webRoot": "${workspaceFolder}/app"
+        }
+    ],
+    "compounds": [
+        // ========================================
+        // COMPOUND DEBUGGING CONFIGURATIONS
+        // ========================================
+        {
+            "name": "Debug Full Stack",
+            "configurations": [
+                "Debug FastAPI Server",
+                "Debug Next.js Development"
+            ],
+            "presentation": {
+                "hidden": false,
+                "group": "fullstack",
+                "order": 1
+            }
+        },
+        {
+            "name": "Debug Full Stack with Browser",
+            "configurations": [
+                "Debug FastAPI Server",
+                "Debug Next.js Development",
+                "Debug in Chrome"
+            ],
+            "presentation": {
+                "hidden": false,
+                "group": "fullstack",
+                "order": 2
+            }
+        }
+    ]
+}

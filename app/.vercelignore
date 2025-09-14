@@ -1,0 +1,18 @@
+# Essential exclusions for Vercel deployment
+
+# Local development environment
+.env.local
+
+# Build artifacts (Vercel rebuilds these)
+.next/
+node_modules/
+
+# IDE files
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
