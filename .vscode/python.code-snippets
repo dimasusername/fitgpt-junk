@@ -1,0 +1,139 @@
+{
+    // ========================================
+    // PYTHON SNIPPETS
+    // ========================================
+    "FastAPI Route": {
+        "prefix": "route",
+        "body": [
+            "@router.${1:get}(\"/${2:endpoint}\")",
+            "async def ${3:function_name}(",
+            "    ${4:# parameters}",
+            ") -> ${5:ResponseType}:",
+            "    \"\"\"${6:Endpoint description}\"\"\"",
+            "    ${7:# implementation}",
+            "    return ${8:result}"
+        ],
+        "description": "Create a FastAPI route"
+    },
+    "FastAPI Dependency": {
+        "prefix": "depend",
+        "body": [
+            "def ${1:dependency_name}(",
+            "    ${2:# parameters}",
+            ") -> ${3:ReturnType}:",
+            "    \"\"\"${4:Dependency description}\"\"\"",
+            "    ${5:# implementation}",
+            "    return ${6:result}"
+        ],
+        "description": "Create a FastAPI dependency"
+    },
+    "Pydantic Model": {
+        "prefix": "model",
+        "body": [
+            "class ${1:ModelName}(BaseModel):",
+            "    \"\"\"${2:Model description}\"\"\"",
+            "    ",
+            "    ${3:field_name}: ${4:FieldType} = Field(",
+            "        ..., description=\"${5:Field description}\"",
+            "    )",
+            "    ",
+            "    class Config:",
+            "        json_schema_extra = {",
+            "            \"example\": {",
+            "                \"${3:field_name}\": \"${6:example_value}\"",
+            "            }",
+            "        }"
+        ],
+        "description": "Create a Pydantic model"
+    },
+    "Pytest Test Function": {
+        "prefix": "test",
+        "body": [
+            "@pytest.mark.${1:unit}",
+            "async def test_${2:function_name}():",
+            "    \"\"\"Test ${3:description}\"\"\"",
+            "    # Arrange",
+            "    ${4:# setup}",
+            "    ",
+            "    # Act",
+            "    ${5:# execution}",
+            "    ",
+            "    # Assert",
+            "    ${6:# verification}"
+        ],
+        "description": "Create a pytest test function"
+    },
+    "Pytest Fixture": {
+        "prefix": "fixture",
+        "body": [
+            "@pytest.fixture",
+            "def ${1:fixture_name}():",
+            "    \"\"\"${2:Fixture description}\"\"\"",
+            "    ${3:# setup}",
+            "    yield ${4:value}",
+            "    ${5:# teardown}"
+        ],
+        "description": "Create a pytest fixture"
+    },
+    "Error Handler": {
+        "prefix": "error",
+        "body": [
+            "try:",
+            "    ${1:# code that might raise an exception}",
+            "except ${2:ExceptionType} as e:",
+            "    logger.error(f\"${3:Error message}: {e}\")",
+            "    raise HTTPException(",
+            "        status_code=${4:400},",
+            "        detail=\"${5:Error detail}\"",
+            "    )"
+        ],
+        "description": "Create an error handler"
+    },
+    "Logger Setup": {
+        "prefix": "logger",
+        "body": [
+            "import logging",
+            "",
+            "logger = logging.getLogger(__name__)"
+        ],
+        "description": "Setup logger"
+    },
+    "Async Function": {
+        "prefix": "async",
+        "body": [
+            "async def ${1:function_name}(",
+            "    ${2:# parameters}",
+            ") -> ${3:ReturnType}:",
+            "    \"\"\"${4:Function description}\"\"\"",
+            "    ${5:# implementation}",
+            "    return ${6:result}"
+        ],
+        "description": "Create an async function"
+    },
+    "Type Hint Import": {
+        "prefix": "typing",
+        "body": [
+            "from typing import ${1:List, Dict, Optional, Union, Any}"
+        ],
+        "description": "Import common typing types"
+    },
+    "FastAPI Imports": {
+        "prefix": "fastapi-imports",
+        "body": [
+            "from fastapi import APIRouter, Depends, HTTPException, status",
+            "from pydantic import BaseModel, Field",
+            "from typing import List, Optional"
+        ],
+        "description": "Common FastAPI imports"
+    },
+    "Database Session": {
+        "prefix": "db-session",
+        "body": [
+            "async def get_db_session():",
+            "    \"\"\"Get database session dependency\"\"\"",
+            "    async with get_session() as session:",
+            "        yield session"
+        ],
+        "description": "Database session dependency"
+    }
+}

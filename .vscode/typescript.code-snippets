@@ -1,0 +1,181 @@
+{
+    // ========================================
+    // REACT/NEXT.JS SNIPPETS
+    // ========================================
+    "React Functional Component": {
+        "prefix": "rfc",
+        "body": [
+            "import React from 'react';",
+            "",
+            "interface ${1:ComponentName}Props {",
+            "  ${2:// props}",
+            "}",
+            "",
+            "const ${1:ComponentName}: React.FC<${1:ComponentName}Props> = ({",
+            "  ${3:// destructured props}",
+            "}) => {",
+            "  return (",
+            "    <div>",
+            "      ${4:// component content}",
+            "    </div>",
+            "  );",
+            "};",
+            "",
+            "export default ${1:ComponentName};"
+        ],
+        "description": "Create a React functional component"
+    },
+    "React Hook": {
+        "prefix": "hook",
+        "body": [
+            "import { useState, useEffect } from 'react';",
+            "",
+            "export const use${1:HookName} = (${2:parameters}) => {",
+            "  const [${3:state}, set${3/(.*)/${1:/capitalize}/}] = useState(${4:initialState});",
+            "  ",
+            "  useEffect(() => {",
+            "    ${5:// effect logic}",
+            "  }, [${6:dependencies}]);",
+            "  ",
+            "  return {",
+            "    ${3:state},",
+            "    set${3/(.*)/${1:/capitalize}/},",
+            "    ${7:// other returns}",
+            "  };",
+            "};"
+        ],
+        "description": "Create a custom React hook"
+    },
+    "Next.js Page": {
+        "prefix": "page",
+        "body": [
+            "import { NextPage } from 'next';",
+            "import Head from 'next/head';",
+            "",
+            "interface ${1:PageName}Props {",
+            "  ${2:// props}",
+            "}",
+            "",
+            "const ${1:PageName}: NextPage<${1:PageName}Props> = ({",
+            "  ${3:// destructured props}",
+            "}) => {",
+            "  return (",
+            "    <>",
+            "      <Head>",
+            "        <title>${4:Page Title}</title>",
+            "        <meta name=\"description\" content=\"${5:Page description}\" />",
+            "      </Head>",
+            "      <main>",
+            "        ${6:// page content}",
+            "      </main>",
+            "    </>",
+            "  );",
+            "};",
+            "",
+            "export default ${1:PageName};"
+        ],
+        "description": "Create a Next.js page component"
+    },
+    "API Route": {
+        "prefix": "api",
+        "body": [
+            "import { NextApiRequest, NextApiResponse } from 'next';",
+            "",
+            "export default async function handler(",
+            "  req: NextApiRequest,",
+            "  res: NextApiResponse",
+            ") {",
+            "  if (req.method === '${1:GET}') {",
+            "    try {",
+            "      ${2:// implementation}",
+            "      res.status(200).json({ ${3:data} });",
+            "    } catch (error) {",
+            "      res.status(500).json({ error: '${4:Error message}' });",
+            "    }",
+            "  } else {",
+            "    res.setHeader('Allow', ['${1:GET}']);",
+            "    res.status(405).end(`Method ${req.method} Not Allowed`);",
+            "  }",
+            "}"
+        ],
+        "description": "Create a Next.js API route"
+    },
+    "Tailwind Component": {
+        "prefix": "tw",
+        "body": [
+            "const ${1:ComponentName} = () => {",
+            "  return (",
+            "    <div className=\"${2:tailwind-classes}\">",
+            "      ${3:// content}",
+            "    </div>",
+            "  );",
+            "};"
+        ],
+        "description": "Create a component with Tailwind classes"
+    },
+    "TypeScript Interface": {
+        "prefix": "interface",
+        "body": [
+            "interface ${1:InterfaceName} {",
+            "  ${2:property}: ${3:type};",
+            "  ${4:// additional properties}",
+            "}"
+        ],
+        "description": "Create a TypeScript interface"
+    },
+    "TypeScript Type": {
+        "prefix": "type",
+        "body": [
+            "type ${1:TypeName} = ${2:definition};"
+        ],
+        "description": "Create a TypeScript type"
+    },
+    "Fetch API Call": {
+        "prefix": "fetch",
+        "body": [
+            "const ${1:functionName} = async (${2:parameters}) => {",
+            "  try {",
+            "    const response = await fetch('${3:url}', {",
+            "      method: '${4:GET}',",
+            "      headers: {",
+            "        'Content-Type': 'application/json',",
+            "        ${5:// additional headers}",
+            "      },",
+            "      ${6:body: JSON.stringify(data),}",
+            "    });",
+            "    ",
+            "    if (!response.ok) {",
+            "      throw new Error(`HTTP error! status: ${response.status}`);",
+            "    }",
+            "    ",
+            "    const data = await response.json();",
+            "    return data;",
+            "  } catch (error) {",
+            "    console.error('${7:Error message}:', error);",
+            "    throw error;",
+            "  }",
+            "};"
+        ],
+        "description": "Create a fetch API call"
+    },
+    "useEffect Hook": {
+        "prefix": "useeffect",
+        "body": [
+            "useEffect(() => {",
+            "  ${1:// effect logic}",
+            "  ",
+            "  return () => {",
+            "    ${2:// cleanup}",
+            "  };",
+            "}, [${3:dependencies}]);"
+        ],
+        "description": "Create a useEffect hook"
+    },
+    "useState Hook": {
+        "prefix": "usestate",
+        "body": [
+            "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState<${2:type}>(${3:initialValue});"
+        ],
+        "description": "Create a useState hook"
+    }
+}
