@@ -1,0 +1,102 @@
+[tool.pytest.ini_options]
+# pytest configuration for the FastAPI server
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--asyncio-mode=auto",
+    "--disable-warnings"
+]
+asyncio_mode = "auto"
+
+# Test markers for categorization
+markers = [
+    "unit: marks tests as unit tests (fast, no external dependencies)",
+    "integration: marks tests as integration tests (slower, may need external services)", 
+    "api: marks tests as API endpoint tests (HTTP-level testing)",
+    "db: marks tests as database tests (requires database connection)",
+    "slow: marks tests as slow running tests"
+]
+
+# Pytest plugins
+# addopts can also include: --cov=app --cov-report=html for coverage
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.git
+  | \.venv
+  | venv
+  | \.pytest_cache
+  | htmlcov
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["app"]
+known_third_party = ["fastapi", "pydantic", "supabase", "pypdf", "google"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+skip = [".venv", "venv", ".pytest_cache", "htmlcov", "migrations"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+# Per-module options
+[[tool.mypy.overrides]]
+module = [
+    "supabase.*",
+    "pypdf.*",
+    "google.*"
+]
+ignore_missing_imports = true
+
+# Test files can be less strict
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:"
+]
